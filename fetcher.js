@@ -14,6 +14,18 @@ const destination = argv[3];
 needle.get(URL, (error, _response, body) => {
   if (error) {
     return `There was an error: ${error}`;// Print the error if one occurred 
-  } 
+  }
+
+  responseHandler(body); // Passing the URL body content to callback function.
 });
 
+// callback. Script that writes the data received to its destination.
+const responseHandler = function(response) {
+  fs.writeFile(destination, response, error => {
+    if (error) {
+      return `There was an error writing the data: ${error}`;
+    } else {
+      dataSize(destination);
+    }
+  })
+}

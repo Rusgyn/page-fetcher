@@ -29,3 +29,14 @@ const responseHandler = function(response) {
     }
   })
 }
+
+//callback. Script that calculate the size of the downloaded data.
+const dataSize = function(data) {
+  fs.stat(data, (error, stats) => {
+    if (error) {
+      return `There was an error getting the size of the data: ${error}`;
+    } else {
+      console.log(`Downloaded and saved ${stats.size} bytes to ${data}`)
+    }
+  });
+}
